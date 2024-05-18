@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import geopandas
+import matplotlib.pyplot as plt
 import pickle
 import requests
 import json
@@ -135,7 +136,14 @@ with sqlite3.connect('database.db') as connection:
     cursor = connection.cursor()
     timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     cursor.execute("INSERT INTO visits (Timestamp) VALUES (?)", (timestamp,))
-    total_visits = cursor.execute('SELECT count(VisitID) FROM visits').fetchone()[0]
+    
+    total_visits = cursor.execute('SELECT COUNT(VisitID) FROM visits').fetchone()[0]
+
+    cursor.execute("SELECT COUNT(VisitID) FROM visits GROUP BY DATE(Timestamp)")
+    data=cursor.fetchall()
+    
+visits_by_date_df = pd.DataFrame(data, columns=['visit_date', 'visit_count'])    
+fig=visits_by_date_df.plot(figsize=(3,2),title='Website Visits By Date')
 
 
 
@@ -153,5 +161,6 @@ If you're curious about the code and want to explore it, feel free to visit my [
 st.sidebar.markdown(intro_text)
 st.sidebar.markdown("<br><br>", unsafe_allow_html=True)
 st.sidebar.markdown(f'<p style="font-size:20px;">Total Website Visits: {total_visits}</p>', unsafe_allow_html=True)
+st.sidebar.pyplot(fig)
 
 
