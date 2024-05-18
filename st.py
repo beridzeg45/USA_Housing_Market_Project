@@ -140,7 +140,12 @@ with sqlite3.connect('database.db') as connection:
     total_visits = cursor.execute('SELECT COUNT(VisitID) FROM visits').fetchone()[0]
     
     visits_by_date_df=pd.read_sql("SELECT DATE(Timestamp) as visit_date, COUNT(VisitID) as VisitsCount FROM visits GROUP BY DATE(Timestamp)",connection)
-    fig=visits_by_date_df.plot(figsize=(3,2),title='Website Visits By Date')
+    visits_by_date_df.columns=['Date','Visits Count']
+    
+    fig,ax=plt.subplots(figsize=(4,2))
+    visits_by_date_df.plot(ax=ax,x='Date',y='Visits Count')
+
+    
 
 
 
