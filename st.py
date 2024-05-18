@@ -26,7 +26,7 @@ def return_scatter_mapbox():
     filtered=grouped_city[grouped_city['Date']==last_period]
 
     fig=px.scatter_mapbox(filtered,lon='Lon',lat='Lat',zoom=3.5,
-                        color='Price',color_continuous_scale='plasma',
+                        color='Price', color_continuous_scale='Plotly3'
                         size='Price',
                         hover_name='City_State')
     fig.update_layout(mapbox_style='open-street-map')
@@ -87,7 +87,7 @@ def return_choropleth_fig(input_value):
         fig = px.choropleth_mapbox(filtered,
                             geojson=filtered.geometry,
                             locations=filtered.index,
-                            color='Price',opacity=1,color_continuous_scale='Reds',
+                            color='Price',opacity=1,color_continuous_scale='Plotly3',
                             hover_name='RegionName'
                             )
         fig.update_layout(mapbox_style='carto-positron',mapbox_center={'lat': filtered.geometry.centroid.y.mean(), 'lon': filtered.geometry.centroid.x.mean()},mapbox_zoom=9)
