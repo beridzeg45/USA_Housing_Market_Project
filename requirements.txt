@@ -3,5 +3,5 @@ pandas
 plotly
 requests
 geopandas
-
+matplotlib
 
