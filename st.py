@@ -142,8 +142,11 @@ with sqlite3.connect('database.db') as connection:
     cursor.execute("SELECT COUNT(VisitID) FROM visits GROUP BY DATE(Timestamp)")
     data=cursor.fetchall()
     
-visits_by_date_df = pd.DataFrame(data, columns=['visit_date', 'visit_count'])    
-fig=visits_by_date_df.plot(figsize=(3,2),title='Website Visits By Date')
+if not data:
+    st.sidebar.write("No data available to display.")
+else:
+    visits_by_date_df = pd.DataFrame(data, columns=['visit_date', 'visit_count'])  
+    fig=visits_by_date_df.plot(figsize=(3,2),title='Website Visits By Date')
 
 
 
