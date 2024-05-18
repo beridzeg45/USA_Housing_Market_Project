@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import geopandas
 import matplotlib.pyplot as plt
+plt.style.use('ggplot')
 import pickle
 import requests
 import json
@@ -142,13 +143,11 @@ with sqlite3.connect('database.db') as connection:
     visits_by_date_df=pd.read_sql("SELECT DATE(Timestamp) as visit_date, COUNT(VisitID) as VisitsCount FROM visits GROUP BY DATE(Timestamp)",connection)
     visits_by_date_df.columns=['Date','Visits Count']
     
-    fig,ax=plt.subplots(figsize=(4,2))
-    visits_by_date_df.plot(ax=ax,x='Date',y='Visits Count')
-
+    fig,ax=plt.subplots()
+    visits_by_date_df.plot(ax=ax,x='Date',y='Visits Count',marker='o')
+    ax.set_title('Number Of Wbsite Visitors By Date',fontweight='bold')
+    ax.set_xlabel(None)
     
-
-
-
 
 
 # Add intro text to upper left corner
