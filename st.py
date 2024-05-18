@@ -138,15 +138,9 @@ with sqlite3.connect('database.db') as connection:
     cursor.execute("INSERT INTO visits (Timestamp) VALUES (?)", (timestamp,))
     
     total_visits = cursor.execute('SELECT COUNT(VisitID) FROM visits').fetchone()[0]
-
-    cursor.execute("SELECT COUNT(VisitID) FROM visits GROUP BY DATE(Timestamp)")
-    data=cursor.fetchall()
     
-if not data:
-    st.sidebar.write("No data available to display.")
-else:
-    visits_by_date_df = pd.DataFrame(data, columns=['visit_date', 'visit_count'])  
-    fig=visits_by_date_df.plot(figsize=(3,2),title='Website Visits By Date')
+    visits_by_date_df=pd.read_sql("SELECT DATE(Timestamp) as visit_date, COUNT(VisitID) as VisitsCount FROM visits GROUP BY DATE(Timestamp",connection)
+fig=pd.read_sql().plot(figsize=(3,2),title='Website Visits By Date')
 
 
 
