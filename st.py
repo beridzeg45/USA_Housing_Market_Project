@@ -133,17 +133,14 @@ if st.button('Show Prices By Zip Code') and input_value:
 
 
 #sqlite3
+connection = sqlite3.connect('database.db')
+cursor = connection.cursor()
+
 def insert_data_into_db():
-    connection = sqlite3.connect('database.db')
-    cursor = connection.cursor()
     timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     cursor.execute("INSERT INTO visits (Timestamp) VALUES (?)", (timestamp,))
-    connection.commit()
-    connection.close()
 
 def get_visits_by_date():
-    connection = sqlite3.connect('database.db')
-    cursor = connection.cursor()
     total_visits = cursor.execute('SELECT COUNT(VisitID) FROM visits').fetchone()[0]
     visits_by_date_df=pd.read_sql("SELECT DATE(Timestamp) as visit_date, COUNT(VisitID) as VisitsCount FROM visits GROUP BY DATE(Timestamp)",connection)
     visits_by_date_df.columns=['Date','Visits Count']
@@ -157,6 +154,9 @@ def create_visits_graph():
     ax.set_title('Number Of Wbsite Visitors By Date',fontweight='bold')
     ax.set_xlabel(None)
     return fig
+
+connection.commit()
+connection.close()
     
 
 
