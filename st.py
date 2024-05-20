@@ -141,7 +141,7 @@ def insert_data_into_db():
     connection.commit()
     connection.close()
 
-def get_visits_by_date()
+def get_visits_by_date():
     connection = sqlite3.connect('database.db')
     total_visits = cursor.execute('SELECT COUNT(VisitID) FROM visits').fetchone()[0]
     visits_by_date_df=pd.read_sql("SELECT DATE(Timestamp) as visit_date, COUNT(VisitID) as VisitsCount FROM visits GROUP BY DATE(Timestamp)",connection)
