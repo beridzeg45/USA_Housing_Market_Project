@@ -156,9 +156,7 @@ def create_visits_graph():
     ax.set_title('Number Of Wbsite Visitors By Date',fontweight='bold')
     ax.set_xlabel(None)
     return fig
-    
-insert_data_into_db()
-    
+        
 
 
 # Add intro text to upper left corner
@@ -170,6 +168,8 @@ I'm Giorgi, and this is my another python project : USA House Prices Analysis.\n
 It involves following python librarries in action: pandas, plotly, sqlite3.\n
 If you're curious about the code and want to explore it, feel free to visit my [Github account!](https://github.com/beridzeg45)\n
 """
+
+insert_data_into_db()
 total_visits, visits_by_date_df=get_visits_by_date()
 fig=create_visits_graph()
 
