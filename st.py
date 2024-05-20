@@ -184,5 +184,8 @@ with open("database.db", "rb") as file:
         file_name="database.db",
         mime="application/octet-stream"
     )
+    
+#close sqlite3 connection
+connection.close()
 
 
