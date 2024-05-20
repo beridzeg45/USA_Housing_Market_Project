@@ -8,9 +8,9 @@ import pickle
 import requests
 import json
 import warnings
+warnings.filterwarnings('ignore')
 import sqlite3
 import datetime
-warnings.filterwarnings('ignore')
 
 
 grouped_zip=pd.read_csv('grouped_zip.csv')
@@ -177,10 +177,9 @@ st.sidebar.markdown("<br><br>", unsafe_allow_html=True)
 st.sidebar.markdown(f'<p style="font-size:20px;">Total Website Visits: {total_visits}</p>', unsafe_allow_html=True)
 st.sidebar.pyplot(fig)
 
-st.sidebar.markdown("### Download Database")
 with open("database.db", "rb") as file:
     st.sidebar.download_button(
-        label="Download database.db",
+        label="Download Database",
         data=file,
         file_name="database.db",
         mime="application/octet-stream"
