@@ -132,21 +132,30 @@ if st.button('Show Prices By Zip Code') and input_value:
         st.plotly_chart(choropleth_fig, use_container_width=True)
 
 
-#append visits data to db
-with sqlite3.connect('database.db') as connection:
+#sqlite3
+def insert_data_into_db():
+    connection = sqlite3.connect('database.db')
     cursor = connection.cursor()
     timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     cursor.execute("INSERT INTO visits (Timestamp) VALUES (?)", (timestamp,))
-    
+    connection.commit()
+    connection.close()
+
+def get_visits_by_date()
+    connection = sqlite3.connect('database.db')
     total_visits = cursor.execute('SELECT COUNT(VisitID) FROM visits').fetchone()[0]
-    
     visits_by_date_df=pd.read_sql("SELECT DATE(Timestamp) as visit_date, COUNT(VisitID) as VisitsCount FROM visits GROUP BY DATE(Timestamp)",connection)
     visits_by_date_df.columns=['Date','Visits Count']
+    return total_visits, visits_by_date_df
+
+def create_visits_graph():
+    total_visits, visits_by_date_df=get_visits_by_date()
     
     fig,ax=plt.subplots()
     visits_by_date_df.plot(ax=ax,x='Date',y='Visits Count',marker='o')
     ax.set_title('Number Of Wbsite Visitors By Date',fontweight='bold')
     ax.set_xlabel(None)
+    return fig
     
 
 
@@ -159,9 +168,21 @@ I'm Giorgi, and this is my another python project : USA House Prices Analysis.\n
 It involves following python librarries in action: pandas, plotly, sqlite3.\n
 If you're curious about the code and want to explore it, feel free to visit my [Github account!](https://github.com/beridzeg45)\n
 """
+total_visits, visits_by_date_df=get_visits_by_date()
+fig=create_visits_graph()
+
 st.sidebar.markdown(intro_text)
 st.sidebar.markdown("<br><br>", unsafe_allow_html=True)
 st.sidebar.markdown(f'<p style="font-size:20px;">Total Website Visits: {total_visits}</p>', unsafe_allow_html=True)
 st.sidebar.pyplot(fig)
+
+st.sidebar.markdown("### Download Database")
+with open("database.db", "rb") as file:
+    st.sidebar.download_button(
+        label="Download database.db",
+        data=file,
+        file_name="database.db",
+        mime="application/octet-stream"
+    )
 
 
