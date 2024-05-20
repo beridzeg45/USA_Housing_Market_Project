@@ -139,6 +139,7 @@ cursor = connection.cursor()
 def insert_data_into_db():
     timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     cursor.execute("INSERT INTO visits (Timestamp) VALUES (?)", (timestamp,))
+    connection.commit()
 
 def get_visits_by_date():
     total_visits = cursor.execute('SELECT COUNT(VisitID) FROM visits').fetchone()[0]
@@ -154,8 +155,8 @@ def create_visits_graph():
     ax.set_title('Number Of Wbsite Visitors By Date',fontweight='bold')
     ax.set_xlabel(None)
     return fig
-
-connection.commit()
+    
+insert_data_into_db()
 connection.close()
     
 
