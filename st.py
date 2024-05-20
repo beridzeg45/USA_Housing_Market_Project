@@ -140,7 +140,6 @@ def insert_data_into_db():
     timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     cursor.execute("INSERT INTO visits (Timestamp) VALUES (?)", (timestamp,))
     connection.commit()
-    connection.close()
 
 def get_visits_by_date():
     total_visits = cursor.execute('SELECT COUNT(VisitID) FROM visits').fetchone()[0]
