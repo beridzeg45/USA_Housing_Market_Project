@@ -1,3 +1,4 @@
+#imports and defining data
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -23,7 +24,7 @@ last_period=str(grouped_city['Date'].max())
 
 all_cities=list(grouped_city['City_State'].unique())
 
-
+#plotly graphs
 def return_scatter_mapbox():
     filtered=grouped_city[grouped_city['Date']==last_period]
 
