@@ -120,7 +120,7 @@ with col_1:
     show_city_button=st.button('Show Prices By City')
         
 with col_2:
-    input_value=st.selectbox(label='',placeholder='Select One City',options=['']+all_cities)
+    input_value=st.selectbox(label='Select One City',options=['']+all_cities)
     show_zipcode_button=st.button('Show Prices By Zip Code')
     
 
