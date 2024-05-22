@@ -29,7 +29,7 @@ def return_scatter_mapbox():
     filtered=grouped_city[grouped_city['Date']==last_period]
 
     fig=px.scatter_mapbox(filtered,lon='Lon',lat='Lat',zoom=3.5,
-                        color='Price', color_continuous_scale='Plotly3',
+                        color='Price', color_continuous_scale='Plotly3',opacity=0.6,
                         size='Price',
                         hover_name='City_State')
     fig.update_layout(mapbox_style='open-street-map')
@@ -172,7 +172,9 @@ st.sidebar.markdown("# About me:")
 intro_text = """
 Hi!👋 \n
 I'm Giorgi, and this is my another python project : USA House Prices Analysis.\n
-It involves following python librarries in action: pandas, plotly, sqlite3.\n
+You will be able to observe, how house prices have been changing in 500 biggest USA cities since 2000.\n
+As well as view prices by zip code for the latest period.\n
+This project utilizes following Python libraries : pandas, plotly, sqlite3.\n
 If you're curious about the code and want to explore it, feel free to visit my [Github account!](https://github.com/beridzeg45)\n
 """
 
