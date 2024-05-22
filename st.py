@@ -114,12 +114,9 @@ scatter_mapbox_fig = return_scatter_mapbox()
 st.plotly_chart(scatter_mapbox_fig, use_container_width=True)
 
 col_1, col_2=st.columns(2)
+
 with col_1:
     input_values_list=st.multiselect(label='',placeholder='Type city name (or multiple names for comparison)',options=['']+all_cities)
-with col_2:
-    input_value=st.selectbox(label='',placeholder='Type city name (this may take 10-15 seconds)',options=['']+all_cities)
-
-
 if st.button('Show Prices By City') and input_values_list:
     col1,col2=st.columns(2)
     price_fig=return_price_fig(input_values_list)
@@ -129,7 +126,9 @@ if st.button('Show Prices By City') and input_values_list:
         st.plotly_chart(price_fig,use_container_width=True)
     with col2:
         st.plotly_chart(change_fig,use_container_width=True)
-
+        
+with col_2:
+    input_value=st.selectbox(label='',placeholder='Type city name (this may take 10-15 seconds)',options=['']+all_cities)
 if st.button('Show Prices By Zip Code') and input_value:
     with st.spinner('Estimated time to the graph is 10-15 seconds...'):
         choropleth_fig=return_choropleth_fig(input_value)
