@@ -29,8 +29,8 @@ def return_scatter_mapbox():
     filtered=grouped_city[grouped_city['Date']==last_period]
 
     fig=px.scatter_mapbox(filtered,lon='Lon',lat='Lat',zoom=3.5,
-                        color='Price', color_continuous_scale='Plotly3',opacity=0.6,
-                        size=filtered['Price']*2,
+                        color='Price', color_continuous_scale='Plotly3',opacity=0.8,
+                        size=filtered['Price']*10,
                         hover_name='City_State')
     fig.update_layout(mapbox_style='open-street-map')
     fig.update_layout(margin=dict(l=0, r=0, t=0, b=0),template='plotly_dark',height=600,width=2000)
