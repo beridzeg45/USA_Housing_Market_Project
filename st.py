@@ -117,7 +117,14 @@ col_1, col_2=st.columns(2)
 
 with col_1:
     input_values_list=st.multiselect(label='',placeholder='Type city name (or multiple names for comparison)',options=['']+all_cities)
-if st.button('Show Prices By City') and input_values_list:
+    show_city_button=st.button('Show Prices By City')
+        
+with col_2:
+    input_value=st.selectbox(label='',placeholder='Type city name (this may take 10-15 seconds)',options=['']+all_cities)
+    show_zipcode_button=st.button('Show Prices By Zip Code')
+    
+
+if show_city_button and input_values_list:
     col1,col2=st.columns(2)
     price_fig=return_price_fig(input_values_list)
     change_fig=return_change_fig(input_values_list)
@@ -126,10 +133,8 @@ if st.button('Show Prices By City') and input_values_list:
         st.plotly_chart(price_fig,use_container_width=True)
     with col2:
         st.plotly_chart(change_fig,use_container_width=True)
-        
-with col_2:
-    input_value=st.selectbox(label='',placeholder='Type city name (this may take 10-15 seconds)',options=['']+all_cities)
-if st.button('Show Prices By Zip Code') and input_value:
+    
+if show_zipcode_button and input_value:
     with st.spinner('Estimated time to the graph is 10-15 seconds...'):
         choropleth_fig=return_choropleth_fig(input_value)
         st.plotly_chart(choropleth_fig, use_container_width=True)
