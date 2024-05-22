@@ -120,7 +120,7 @@ with col_1:
     show_city_button=st.button('Show Prices By City')
         
 with col_2:
-    input_value=st.selectbox(label='',placeholder='Type city name (this may take 10-15 seconds)',options=['']+all_cities)
+    input_value=st.selectbox(label='',placeholder='Select One City',options=['']+all_cities)
     show_zipcode_button=st.button('Show Prices By Zip Code')
     
 
@@ -135,7 +135,7 @@ if show_city_button and input_values_list:
         st.plotly_chart(change_fig,use_container_width=True)
     
 if show_zipcode_button and input_value:
-    with st.spinner('Estimated time to the graph is 10-15 seconds...'):
+    with st.spinner('Estimated time: 10-15 seconds...'):
         choropleth_fig=return_choropleth_fig(input_value)
         st.plotly_chart(choropleth_fig, use_container_width=True)
 
