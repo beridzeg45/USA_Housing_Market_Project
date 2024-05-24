@@ -30,7 +30,7 @@ def return_scatter_mapbox():
 
     fig=px.scatter_mapbox(filtered,lon='Lon',lat='Lat',zoom=3.5,
                         color='Price', color_continuous_scale='Plotly3',opacity=0.8,
-                        size=pd.qcut(filtered['Price'],q=10,labels=None,duplicates='drop'),
+                        size=pd.qcut(filtered['Price'],q=10,labels=False,duplicates='drop'),
                         #size='Price',
                         hover_name='City_State')
     fig.update_layout(mapbox_style='open-street-map')
