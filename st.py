@@ -160,7 +160,7 @@ def create_visits_graph():
     total_visits, visits_by_date_df=get_visits_by_date()
     
     fig,ax=plt.subplots()
-    visits_by_date_df.plot(ax=ax,x='Date',y='Visits Count',marker='o')
+    visits_by_date_df.iloc[1:].plot(ax=ax,x='Date',y='Visits Count',marker='o')
     ax.set_title('Number Of Wbsite Visitors By Date',fontweight='bold')
     ax.set_xlabel(None)
     return fig
