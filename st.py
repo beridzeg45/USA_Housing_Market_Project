@@ -32,7 +32,7 @@ def return_scatter_mapbox():
                         color='Price', color_continuous_scale='Plotly3',opacity=0.8,
                         size='Price',
                         hover_name='City_State')
-    fig.update_layout(mapbox_style='stamen-toner-lite')#open-street-map
+    fig.update_layout(mapbox_style='carto-darkmatter')#open-street-map
     fig.update_layout(margin=dict(l=0, r=0, t=0, b=0),template='plotly_dark',height=600,width=2000)
     fig.update_layout(title=dict(text='Biggest USA Cities And AVerage House Prices',font_family='Arial Black'))
     fig.update_layout(coloraxis_showscale=False)
