@@ -93,7 +93,7 @@ def return_choropleth_fig(input_value):
                             color='Price',opacity=0.6,color_continuous_scale='Plotly3',
                             hover_name='RegionName'
                             )
-        fig.update_layout(mapbox_style='carto-positron',mapbox_center={'lat': filtered.geometry.centroid.y.mean(), 'lon': filtered.geometry.centroid.x.mean()},mapbox_zoom=9)
+        fig.update_layout(mapbox_style='carto-darkmatter',mapbox_center={'lat': filtered.geometry.centroid.y.mean(), 'lon': filtered.geometry.centroid.x.mean()},mapbox_zoom=9)
         fig.update_layout(height=1000,width=1000,margin=dict(l=0,r=0,t=30,b=0),template='plotly_dark')
         fig.update_layout(title=dict(text=f'House Prices Heatmap Based On ZipCodes In {city_state}',font_family='Arial Black'))
         fig.update_layout(coloraxis_showscale=False)
